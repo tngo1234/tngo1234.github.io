@@ -13,15 +13,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
-   $.getJSON('book.json', function(data) {
-      var html = '<ul>';
-      $.each(data, function(key, val) {
-         html += '<li id="' + key + '">'+key + ':' + val.id + ':' + val.title + '</li>';
-      });
-      html += '</ul>';
+      var html = '<ul>HELLO WORLD</ul>';
+
       $('#result').html(html);
    });
-});
 </script>
 </head>
 <body>
