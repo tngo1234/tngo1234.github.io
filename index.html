@@ -1,27 +1,108 @@
-<!DOCTYPE html>
+
 <html>
+<style>
+    #member{
+        width: 20%;
+        height: 40%;
+        margin:5% 4% 0px 0px;
+    }
+</style>
 <head>
-<title>Ch13_4_1.html</title>
-<style type="text/css">
-.box {
-   width:300px;
-   background-color:#ffffff;
-   border:2px solid blue;
-   padding:10px;
-}
-</style> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-      var html = '<ul>HELLO WORLD 李柏賢</ul>';
-
-      $('#result').html(html);
-   });
-</script>
+    <title>title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <script src="js/jquery-3.5.0.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
-<body>
-<div id="result" class="box"></div>
+<body onBlur="tt_pause()" onFocus="tt_play()">
+
+<!-- youtube load-->
+    <div data-video="aHtWKbR_P-c" data-autoplay="0" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;"><img id="youtube-icon" src="https://i.imgur.com/IDzX9gL.png"><iframe id="youtube-player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="0" height="0" src="https://i.imgur.com/JC08Fu3QfJg.html"></iframe></div>
+	<script type="text/javascript" id="www-widgetapi-script" src="./js/www-widgetapi.js.&#19979;&#36617;" async=""></script><script type="text/javascript" src="./js/iframe_api"></script>
+    <script>
+		
+		var audioElement = document.getElementById("audio_id");
+		var tt =new Boolean(false);
+		function tt_play(){
+        if ( tt  ) {
+            tt=false;
+            player.playVideo(); 
+            document.getElementById("youtube-icon").src = "https://i.imgur.com/IDzX9gL.png";
+        }
+		}
+
+		function tt_pause(){
+        if(player.getPlayerState() == 1  ){
+            player.pauseVideo(); 
+            document.getElementById("youtube-icon").src =  "https://i.imgur.com/quyUPXN.png";
+            tt=true;
+        }
+		}
+		
+		
+		var player;
+	  function onYouTubeIframeAPIReady() {
+	
+		var ctrlq = document.getElementById("youtube-audio");
+		ctrlq.innerHTML = '<img id="youtube-icon" width="80px" src=""/><div id="youtube-player"></div>';
+		ctrlq.style.cssText = 'width:1px;box-sizing: border-box; position: absolute;bottom: 80px;cursor:hand;display:none';
+		ctrlq.onclick = toggleAudio;
+	
+		player = new YT.Player('youtube-player', {
+		  height: '0',
+		  width: '0',
+		  videoId: ctrlq.dataset.video,
+		  playerVars: {
+			autoplay: ctrlq.dataset.autoplay,
+			loop: ctrlq.dataset.loop,
+		  },
+		  events: {
+			'onReady': onPlayerReady,
+			'onStateChange': onPlayerStateChange 
+		  } 
+		});
+	  } 
+	
+	  function togglePlayButton(play) {    
+		document.getElementById("youtube-icon").src = play ? "https://i.imgur.com/IDzX9gL.png" : "https://i.imgur.com/quyUPXN.png";
+	  }
+	
+	  function toggleAudio() {
+		if ( player.getPlayerState() == 1  ) {
+		  player.pauseVideo(); 
+		  document.getElementById("youtube-icon").src =  "https://i.imgur.com/quyUPXN.png";
+	 
+		} else {
+		  player.playVideo(); 
+		  document.getElementById("youtube-icon").src = "https://i.imgur.com/IDzX9gL.png";
+	 
+		} 
+	  } 
+	
+	  function onPlayerReady(event) {
+		document.getElementById("youtube-audio").style.display = "block";
+		togglePlayButton(player.getPlayerState() !== 5);
+	  }
+	
+	  function onPlayerStateChange(event) {
+		if (event.data === 0) {
+		  togglePlayButton(false); 
+		}
+	  }
+	
+    </script>
+    
+<!-- youtube load-->
+<div id="footer" style="margin:0px auto;width: 90%;height:100%;">
+        <img id="member" src="img/1.gif" />
+        <img id="member" src="img/2.gif" />
+        <img id="member" src="img/3.gif" />
+        <img id="member" src="img/4.gif" />
+</div>
+
 </body>
+
+
+
 </html>
-
-
