@@ -1,7 +1,7 @@
-﻿<!--1.如何拖曳圖片 或鍵盤控制方向	//感覺最難
-	2.bootstrap JS modal用來做地圖的景點介紹出現
-	3.為什麼youtube播放鍵會在左下角? 沒有看到哪裡有寫 他有時候會跑到上面去
-	4.四個member按下沒有跳出modal 應該是JS有錯 不知道if($().click){}這樣寫對不對
+﻿<!--1.如何拖曳圖片 或鍵盤控制方向	//感覺最難 //為甚麼要拖曳圖片?
+	2.bootstrap JS modal用來做地圖的景點介紹出現  //還要做留言板(汗)
+	3.為什麼youtube播放鍵會在左下角? 沒有看到哪裡有寫 他有時候會跑到上面去 //改圖片的位置即可 我沒設它的位置
+	4.四個member按下沒有跳出modal 應該是JS有錯 不知道if($().click){}這樣寫對不對 //應該不能這麼寫 160行的也是 要另外立個flag
 	求幫助-->
 
 <!DOCTYPE html>  
@@ -15,6 +15,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 	<style>
 		body{
 			background-color:aliceblue;
@@ -75,7 +76,7 @@
 	</script>
 </head>
 
-<body onFocus="tt_play()">		<!--按下時-->
+<body>		<!--按下時-->
 
 <!-- youtube load-->
 	<div>
@@ -88,22 +89,6 @@
 		<script type="text/javascript" id="www-widgetapi-script" src="./js/www-widgetapi.js.&#19979;&#36617;" async=""></script>
 		<script type="text/javascript" src="./js/iframe_api"></script>
 		<script>
-			var audioElement = document.getElementById("audio_id");		//??
-			var tt =new Boolean(false);		//將tt設為0
-			function tt_play(){	//按下時
-				if ( tt==false ) {	
-					tt=true;	//0->1
-					player.playVideo(); //播放影片
-					document.getElementById("youtube-icon").src = "https://i.imgur.com/IDzX9gL.png";//按下時的圖片
-				}
-				else{			
-					if(player.getPlayerState() == 1 ){		//播放時
-						player.pauseVideo(); 				//暫停
-						document.getElementById("youtube-icon").src = "https://i.imgur.com/quyUPXN.png";
-						tt=false;		//1->0
-					}
-				}
-			}
 			
 			//這裡以下都是模板function  嗎?
 			var player;
@@ -161,28 +146,28 @@
 			<img id="minga" src="img/雲科地圖截圖.png">
 			<br>
 			<!--我們人物變button-->
-			<img id="member1" type="button" data-toggle="modal" data-target="#myModal" src="img/1.gif" />
-			<img id="member2" type="button" data-toggle="modal" data-target="#myModal" src="img/2.gif" />
-			<img id="member3" type="button" data-toggle="modal" data-target="#myModal" src="img/3.gif" />
-			<img id="member4" type="button" data-toggle="modal" data-target="#myModal" src="img/4.gif" />
+			<img id="member1" type="button" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
+			<img id="member2" type="button" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
+			<img id="member3" type="button" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
+			<img id="member4" type="button" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
 			<!--data target #myModal 確認是否用此member-->
-			<div class="modal" id="myModal1">
+			<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P-->
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<!-- Modal body -->
-						<div class="modal-body">
+						<div class="modal-body" id="modal_body">
 							<script>
-								if($("#member1").click){
-									this.innerHTML="柏賢帶你走雲科 確定ㄇ";
+								if($("#member1").click){     
+									document.getElementById("modal_body").innerHTML="柏賢帶你走雲科 確定ㄇ"; //好像不能用this.innerHTML
 								}
 								else if($("#member2").click){
-									this.innerHTML="宛君帶你走雲科 確定ㄇ";
+									document.getElementById("modal_body").innerHTML="宛君帶你走雲科 確定ㄇ";
 								}
 								else if($("#member3").click){
-									this.innerHTML="冠佑帶你走雲科 確定ㄇ";
+									document.getElementById("modal_body").innerHTML="冠佑帶你走雲科 確定ㄇ";
 								}
 								else if($("#member4").click){
-									this.innerHTML="疫情帶你走雲科 確定ㄇ";
+									document.getElementById("modal_body").innerHTML="疫情帶你走雲科 確定ㄇ";
 								}
 							</script>
 						</div>
@@ -199,14 +184,16 @@
 			<div>
 				<div id="memShowMap">
 					<script>
-						if($("#member1").click){this.innerhtml('<img src="img/1.png" style="left:500px;top:80px;" />');}
-						else if($("#member2").click){this.innerhtml('<img src="img/2.png" style="left:500px;top:80px;" />');}
-						else if($("#member3").click){this.innerhtml('<img src="img/3.png" style="left:500px;top:80px;" />');}
-						else if($("#member4").click){this.innerhtml('<img src="img/4.png" style="left:500px;top:80px;" />');}
+						if($("#member1").click){document.getElementById("memShowMap").innerhtml('<img src="img/1.gif" style="left:500px;top:80px;" />');}
+						else if($("#member2").click){document.getElementById("memShowMap").innerhtml('<img src="img/2.gif" style="left:500px;top:80px;" />');}
+						else if($("#member3").click){document.getElementById("memShowMap").innerhtml('<img src="img/3.gif" style="left:500px;top:80px;" />');}
+						else if($("#member4").click){document.getElementById("memShowMap").innerhtml('<img src="img/4.gif" style="left:500px;top:80px;" />');}
 					</script>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 </body>
 </html>
