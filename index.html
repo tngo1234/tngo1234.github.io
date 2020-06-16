@@ -33,7 +33,9 @@
 			margin-left:300px;
 			margin-top: 0px;
 			display:block;
+			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ 
 		}
+		
 		/*mini game 地圖*/
 		#minga{
 			margin-left:0px;
@@ -63,24 +65,13 @@
 			height: 6%;
 			margin:5% 4% 0px 0px;
 		}
-		
+		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/
 	</style>
 
-	<!--被呼叫的function-->
-	<script>
-		//確認用此member後 此member出現在地圖上(memShowMap)校門口
-		var memShowMap = document.getElementById("#mingame");
-		function function1(){
-			if($("#member1").click){memShowMap.innerhtml = '<img src="img/1.gif" style="left:500px;top:80px;" />');}
-			else if($("#member2").click){memShowMap.innerHTML = '<img src="img/2.gif" style="left:500px;top:80px;" />');}
-			else if($("#member3").click){memShowMap.innerHTML = '<img src="img/3.gif" style="left:500px;top:80px;" />');}
-			else if($("#member4").click){memShowMap.innerHTML = '<img src="img/4.gif" style="left:500px;top:80px;" />');}
-		}
-					
-	</script>
+
 </head>
 
-<body>		<!--按下時-->
+<body>	
 
 <!-- youtube load-->
 	<div>
@@ -142,36 +133,21 @@
 		</script>
 
 		<!--換黑地圖按鈕-->
-		<button id="nightlight" type="button" class="btn btn-primary">黑夜模式</button>
-		<script>
-			var hasbeenclicked = false;
-			if($("#nightlight").click){
-				hasbeenclicked = true;
-			}
-			else{
-				hasbeenclicked = false;
-			}
+		<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
 
-			if(hasbeenclicked){
-				$("#nightlight").innerhtml("白日模式");
-				$("#minga").src("img/黑夜.jpg");
-			}
-			else{
-				$("#nightlight").innerhtml("黑夜模式");
-				$("#minga").src("img/雲科地圖截圖.png");
-			}
-			
-		</script>
-	<div>
+	</div>
 	<div id="mingame">
 		<!--minigame 點選地圖人物 -->
-		<img id="minga" src="img/雲科地圖截圖.png">
+		<div id="map">
+			<img id="minga" src="img/雲科地圖截圖.png">
+			<div id ="mapisert"></div>
+		</div>
 		
 		<!--我們人物變button-->
-		<img id="member1" type="button" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
-		<img id="member2" type="button" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
-		<img id="member3" type="button" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
-		<img id="member4" type="button" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
+		<img id="member1" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
+		<img id="member2" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
+		<img id="member3" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
+		<img id="member4" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
 		<!--data target #myModal1 確認是否用此member-->
 		<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P--><!--QQ QQ-->
 			<div class="modal-dialog">
@@ -179,46 +155,49 @@
 					<!-- Modal body -->
 					<div class="modal-body" id="modal_body">
 						<script>
-							//因為不知道按下的時間為多久 說不定按下的時間不足以執行完if的內容(Stack Overflow How to do "if Clicked Else ..")
-							var hasBeenClicked1 = false;
-							var hasBeenClicked2 = false;
-							var hasBeenClicked3 = false;
-							var hasBeenClicked4 = false;
-							if($("#member1").click){
-								hasBeenClicked1 = true;
+							var hasbeenclicked = false;
+							function nightlightf() {
+								hasbeenclicked=!hasbeenclicked
+								
+								if(hasbeenclicked){
+									document.getElementById("nightlight").innerHTML="白日模式";
+									document.getElementById("minga").src="img/黑夜.jpg";
+									document.querySelector('body').setAttribute('style', 'background-color:#000');  //ㄌ:這邊對body的backgorund屬性做更改 (我也不知道這甚麼原理 抄來的)
+								}
+								else{
+									document.getElementById("nightlight").innerHTML="黑夜模式";
+									document.getElementById("minga").src="img/雲科地圖截圖.png";
+									document.querySelector('body').setAttribute('style', 'background-color:#fff');
+								}
+									
 							}
-							else if($("#member2").click){
-								hasBeenClicked2 = true;
+							var takemember=0;//ㄌ:帶走的角色設為全域
+							function membersure(number) { //ㄌ:按角色後觸發
+								takemember=number
+								var modalContent = document.getElementById("modal_body");
+								if(number==0){   
+									modalContent.innerHTML = "柏賢帶你走雲科 確定ㄇ"; 
+								}
+								else if(number==1){
+									modalContent.innerHTML="宛君帶你走雲科 確定ㄇ";
+								}
+								else if(number==2){
+									modalContent.innerHTML="冠佑帶你走雲科 確定ㄇ";
+								}
+								else if(number==3){
+									modalContent.innerHTML="疫情帶你走雲科 確定ㄇ";
+								}
 							}
-							else if($("#member3").click){
-								hasBeenClicked3 = true;
+							function memberinsert(){//ㄌ:按確定後觸發
+								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
+								document.getElementById("mapisert").innerHTML='<img src="img/'+a+'.gif" style="width: 6%; height: 9%;left:22%;top:12%;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 							}
-							else if($("#member4").click){
-								hasBeenClicked4 = true;
-							}
-
-							var modalContent = document.getElementById("modal_body");
-							if(hasBeenClicked1){   
-								modalContent.innerHTML = "柏賢帶你走雲科 確定ㄇ"; //好像不能用this.innerHTML
-								hasBeenClicked1 = false;
-							}
-							else if(hasBeenClicked2){
-								modalContent.innerHTML="宛君帶你走雲科 確定ㄇ";
-								hasBeenClicked2 = false;
-							}
-							else if(hasBeenClicked3){
-								modalContent.innerHTML="冠佑帶你走雲科 確定ㄇ";
-								hasBeenClicked3 = false;
-							}
-							else if(hasBeenClicked4){
-								modalContent.innerHTML="疫情帶你走雲科 確定ㄇ";
-								hasBeenClicked4 = false;
-							}
+							
 						</script>
 					</div>
 					<!-- Modal footer -->
 					<div class="modal-footer" type=button>
-						<button type="button" class="btn btn-success" id="memShowMap" data-dismiss="modal" onclick="function1()">YES</button>
+						<button type="button" class="btn btn-success" id="memShowMap" data-dismiss="modal" onclick="memberinsert()">YES</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
 					</div>
 				</div>
