@@ -76,7 +76,7 @@
 
 <!-- youtube load-->
 	<div>
-		<div data-video="aHtWKbR_P-c" data-autoplay="0" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
+		<div data-video="V8RwHXUtCcw" data-autoplay="0" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
 			<img id="youtube-icon" src="https://i.imgur.com/IDzX9gL.png">
 			<iframe id="youtube-player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="0" height="0" src="https://i.imgur.com/JC08Fu3QfJg.html"></iframe>
 		</div>
@@ -162,12 +162,12 @@
 								
 								if(hasbeenclicked){
 									document.getElementById("nightlight").innerHTML="白日模式";
-									document.getElementById("minga").src="img/黑夜.png";
+									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
 									document.querySelector('body').setAttribute('style', 'background-color:#000');  //ㄌ:這邊對body的backgorund屬性做更改 (我也不知道這甚麼原理 抄來的)
 								}
 								else{
 									document.getElementById("nightlight").innerHTML="黑夜模式";
-									document.getElementById("minga").src="img/雲科地圖截圖.png";
+									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat "+mmx+"px "+mmy+"px";
 									document.querySelector('body').setAttribute('style', 'background-color:#fff');
 								}
 									
@@ -189,11 +189,12 @@
 									modalContent.innerHTML="弈晴帶你走雲科 確定ㄇ";
 								}
 							}
-							var mx=0,my=0;
+							var mx=0,my=0; //人物位置
+							var mmx=-800,mmy=0;
 							function memberinsert(){//ㄌ:按確定後觸發
 								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
-								mx=26;
-								my=5;
+								mx=23;
+								my=14;
 								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 6%; height: 9%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								
 							}
@@ -201,20 +202,38 @@
 							function game(event){
 								switch(event.keyCode){
 									case 37:
-										mx--;
+										if(mx>8)
+											mx--;
+										else
+											mmx+=5;
+
 										break;
 									case 38:
-										my--;
+										if(my>5)
+											my--;
+										else
+											mmy+=5;
 										break;
 									case 39:
-										mx++;
+										if(mx<40)
+											mx++;
+										else
+											mmx-=5;
 										break;
 									case 40:
-										my++;
+										if(my<70)
+											my++;
+										else
+											mmy-=5;
 										break;
 								}
 								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 6%; height: 9%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
-								document.getElementById("look").innerHTML='mx='+mx+'my='+my //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								if(hasbeenclicked)
+									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
+								else
+									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat "+mmx+"px "+mmy+"px";
+								
+								document.getElementById("look").innerHTML='mx='+mx+'my='+my+'mmx='+mmx+'mmy='+mmy //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								
 							}
 						</script>
