@@ -231,7 +231,7 @@
 					<p id="ttitle" style="font-size:36px;font-family:'DFKai-sb';">雲湧八方</p>	
 					<p id="tcontent" style="font-size:20px;font-family:'DFKai-sb';">位於為校門口前方的大型水池。</p>	
 					<img id="tpicture" src="img/t1.jpg" style="width:400px">	
-					<div id="tfb" class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div>
+					<div id="tfb"><div class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div></div>
 					<div class="modal-body" id="modal_body2"></div>
 					<!-- Modal footer -->
 					<div class="modal-footer" type=button>
@@ -262,7 +262,7 @@
 								document.getElementById("ttitle").innerHTML=tt[num-1];
 								document.getElementById("tcontent").innerHTML=tc[num-1];
 								document.getElementById("tpicture").src="img/t"+num+".jpg";
-								document.getElementById("tfb").setAttribute("data-href","https://tngo1234.github.io/"+num);
+								document.getElementById("tfb").innerHTML='<div class="fb-comments" data-href="https://tngo1234.github.io/'+num+'" data-numposts="5" data-width="500px"></div>'
 								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 
 							}
