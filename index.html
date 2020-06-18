@@ -42,6 +42,7 @@
 			display:block;
 			width: 50%;
 			height: 500px;
+			background:url('img/雲科地圖截圖.png') no-repeat -800px 0px;
 		}
 
 		/*我們*/
@@ -139,7 +140,7 @@
 	<div id="mingame">
 		<!--minigame 點選地圖人物 -->
 		<div id="map">
-			<img id="minga" src="img/雲科地圖截圖.png">
+			<img id="minga">
 			<div id ="mapisert"></div>
 		</div>
 		
@@ -185,14 +186,37 @@
 									modalContent.innerHTML="冠佑帶你走雲科 確定ㄇ";
 								}
 								else if(number==3){
-									modalContent.innerHTML="疫情帶你走雲科 確定ㄇ";
+									modalContent.innerHTML="弈晴帶你走雲科 確定ㄇ";
 								}
 							}
+							var mx=0,my=0;
 							function memberinsert(){//ㄌ:按確定後觸發
 								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
-								document.getElementById("mapisert").innerHTML='<img src="img/'+a+'.gif" style="width: 6%; height: 9%;left:22%;top:12%;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								mx=26;
+								my=5;
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 6%; height: 9%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								
 							}
-							
+							document.addEventListener("keydown",game);
+							function game(event){
+								switch(event.keyCode){
+									case 37:
+										mx--;
+										break;
+									case 38:
+										my--;
+										break;
+									case 39:
+										mx++;
+										break;
+									case 40:
+										my++;
+										break;
+								}
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 6%; height: 9%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								document.getElementById("look").innerHTML='mx='+mx+'my='+my //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								
+							}
 						</script>
 					</div>
 					<!-- Modal footer -->
@@ -204,6 +228,6 @@
 			</div>
 		</div>
 	</div>
-
+<p id="look"></p>
 </body>
 </html>
