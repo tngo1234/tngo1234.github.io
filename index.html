@@ -37,6 +37,7 @@
 			margin-left:0px;
 			margin-top: 0px;
 			width: 100%;
+			height: 400px;
 			display:block;
 			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ 
 		}
@@ -46,80 +47,83 @@
 			margin-left:0px;
 			display:block;
 			width: 100%;
-			height: 500px;
-			background:url('img/雲科地圖截圖.png') no-repeat -500px 0px;
+			height: 1500px;
+			background-color: wheat;
+			background:url('img/雲科地圖截圖.png') no-repeat;
+			background-size:100% 1500px;
+			position:absolute;
+			z-index:0;
 		}
 
 		/*我們*/
 		#member{				
 			width: 15%;
 			height: 30%;
-			margin:5% 4% 0px 0px;
+			margin:5% 4% 0px 0px;	
+		}
+		#members{				
+			top:1500px;
+			position:absolute;
+			background-color: white;
+			z-index:1;
 		}
 		#scene1{
-			width: 1%; 
-			height: 2%;
-			left:28%;
-			top:23%;
+			width: 30px; 
+			height: 30px;
+			left:56%;
+			top:100%;
 			z-index:-1;
 			position:absolute;
 		}
 		#scene2{
-			width: 1%; 
-			height: 2%;
-			left:27%;
-			top:28%;
+			width: 30px; 
+			height: 30px;
+			left:56%;
+			top:136%;
 			z-index:-1;
 			position:absolute;
 		}
 		#scene3{
-			width: 1%; 
-			height: 2%;
-			left:20%;
-			top:24%;
+			width: 30px; 
+			height: 30px;
+			left:40%;
+			top:100%;
 			z-index:-1;
 			position:absolute;
 		}
 		#scene4{
-			width: 1%; 
-			height: 2%;
-			left:24%;
-			top:33%;
+			width: 30px; 
+			height: 30px;
+			left:48%;
+			top:132%;
 			z-index:-1;
 			position:absolute;
 		}
 		#scene5{
-			width: 1%; 
-			height: 2%;
-			left:30%;
-			top:40%;
+			width: 30px; 
+			height: 30px;
+			left:60%;
+			top:330%;
 			z-index:-1;
 			position:absolute;
 		}
 		#scene6{
-			width: 1%; 
-			height: 2%;
-			left:21%;
-			top:50%;
+			width: 30px; 
+			height: 30px;
+			left:42%;
+			top:240%;
 			z-index:-1;
 			position:absolute;
 		}
 		#scene7{
-			width: 1%; 
-			height: 2%;
-			left:26%;
-			top:58%;
+			width: 30px; 
+			height: 30px;
+			left:52%;
+			top:292%;
 			z-index:-1;
 			position:absolute;
 		}
-		#scene8{
-			width: 1%; 
-			height:2%;
-			left:28%;
-			top:74%;
-			z-index:-1;
-			position:absolute;
-		}	
+
 		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/ /*王:嘿嘿 我刪掉了 好像用不到的樣子 可能*/
 	</style>
 
@@ -216,13 +220,16 @@
 			<div id="sc5"><img id="scene5" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id="sc6"><img id="scene6" type="button" onclick="sc(6)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id="sc7"><img id="scene7" type="button" onclick="sc(7)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
-			<div id="sc8"><img id="scene8" type="button" onclick="sc(8)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
-			<div id ="mapisert"></div>
+	
 		</div>
+		<div id ="mapisert"></div>
 		<div class="modal" id="myModal2"> 
 			<div class="modal-dialog">
+				
 				<div class="modal-content">
 					<!-- Modal body -->
+					<p style="font-size:36px;font-family:'DFKai-sb';">雲湧八方</p>	
+					<img>	
 					<div class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div>
 					<div class="modal-body" id="modal_body2"></div>
 					<!-- Modal footer -->
@@ -233,10 +240,12 @@
 			</div>
 		</div>	
 		<!--我們人物變button-->
-		<img id="member" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
-		<img id="member" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
-		<img id="member" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
-		<img id="member" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
+		<div id="members">
+			<img id="member" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
+			<img id="member" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
+			<img id="member" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
+			<img id="member" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
+		</div>
 		<!--data target #myModal1 確認是否用此member-->
 		<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P--><!--QQ QQ-->
 			<div class="modal-dialog">
@@ -244,18 +253,53 @@
 					<!-- Modal body -->
 					<div class="modal-body" id="modal_body">
 						<script>
+							function sc(num){
+								if(num==1){
+									mx=($('#scene1').css('Left')).replace("px",""); //這裡是直接取得元素屬性 裡面會有單位要去掉
+									my=($('#scene1').css('Top')).replace("px","");
+
+								}
+								else if(num==2){
+									mx=($('#scene2').css('Left')).replace("px","");
+									my=($('#scene2').css('Top')).replace("px","");
+								}
+								else if(num==3){
+									mx=($('#scene3').css('Left')).replace("px","");
+									my=($('#scene3').css('Top')).replace("px","");
+								}	
+								else if(num==4){
+									mx=($('#scene4').css('Left')).replace("px","");
+									my=($('#scene4').css('Top')).replace("px","");
+								}
+								else if(num==5){
+									mx=($('#scene5').css('Left')).replace("px","");
+									my=($('#scene5').css('Top')).replace("px","");
+								}
+								else if(num==6){
+									mx=($('#scene6').css('Left')).replace("px","");
+									my=($('#scene6').css('Top')).replace("px","");
+								}
+								else if(num==7){
+									mx=($('#scene7').css('Left')).replace("px","");
+									my=($('#scene7').css('Top')).replace("px","");
+								}
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+
+							}
 							var hasbeenclicked = false;
 							function nightlightf() {
 								hasbeenclicked=!hasbeenclicked
 								
 								if(hasbeenclicked){
 									document.getElementById("nightlight").innerHTML="白日模式";
-									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
+									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat ";
+									document.getElementById("minga").style.backgroundSize="100% 1500px";
 									document.querySelector('body').setAttribute('style', 'background-color:#000');  //ㄌ:這邊對body的backgorund屬性做更改 (我也不知道這甚麼原理 抄來的)
 								}
 								else{
 									document.getElementById("nightlight").innerHTML="黑夜模式";
-									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat "+mmx+"px "+mmy+"px";
+									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat";
+									document.getElementById("minga").style.backgroundSize="100% 1500px";
 									document.querySelector('body').setAttribute('style', 'background-color:#fff');
 								}
 									
@@ -278,22 +322,20 @@
 								}
 							}
 							var mx=0,my=0; //人物位置
-							var mmx=-500,mmy=0;
 							function memberinsert(){//ㄌ:按確定後觸發
 								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
-								mx=40; //人物初始位置
-								my=14;
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 7%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								mx=100; //人物初始位置
+								my=100;
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								
 								//景點位置在地圖上出現
-								document.getElementById("scene1").style='z-index:2;';
-								document.getElementById("scene2").style='z-index:2;';
-								document.getElementById("scene3").style='z-index:2;';
-								document.getElementById("scene4").style='z-index:2;';
-								document.getElementById("scene5").style='z-index:2;';
-								document.getElementById("scene6").style='z-index:2;';
-								document.getElementById("scene7").style='z-index:2;';
-								document.getElementById("scene8").style='z-index:2;';
+								document.getElementById("scene1").style='z-index:4;';
+								document.getElementById("scene2").style='z-index:4;';
+								document.getElementById("scene3").style='z-index:4;';
+								document.getElementById("scene4").style='z-index:4;';
+								document.getElementById("scene5").style='z-index:4;';
+								document.getElementById("scene6").style='z-index:4;';
+								document.getElementById("scene7").style='z-index:4;';
 								//說明第二步驟
 								document.getElementById("ste").innerHTML='第二步 請使用WASD移動 並請按下地圖上任意的紅點 <br/>';
 								
@@ -302,39 +344,21 @@
 							function game(event){
 								switch(event.keyCode){
 									case 65:
-										if(mx>5)
-											mx--;
-										else
-											mmx+=5;
+											mx-=10;
 
 										break;
 									case 87:
-										if(my>20)
-											my--;
-										else
-											mmy+=5;
+											my-=10;
 										break;
 									case 68:
-										if(mx<80)
-											mx++;
-										else
-											mmx-=5;
+											mx+=10;
 										break;
 									case 83:
-										if(my<50)
-											my++;
-										else
-											mmy-=5;
+											my+=10;
 										break;
 								}
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 7%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
-								if(hasbeenclicked)
-									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
-								else
-									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat "+mmx+"px "+mmy+"px";
-								
-								document.getElementById("look").innerHTML='mx='+mx+'my='+my+'mmx='+mmx+'mmy='+mmy //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
-								
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+
 							}
 						</script>
 					</div>
@@ -347,6 +371,5 @@
 			</div>
 		</div>
 	</div>
-<p id="look"></p>
 </body>
 </html>
