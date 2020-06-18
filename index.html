@@ -4,6 +4,10 @@
 	6.點哪一個member都是柏賢帶你走雲科 確定ㄇ  為什麼ㄚㄚㄚㄚㄚㄚㄚㄚ@@
 	7.黑夜白日模式切換失敗 不知道flag到底怎麼立@@
 	求幫助-->
+<!--3.把member和scene背景透明 不知道為什麼用PS透明背景的gif檔都不會動了QQQQ ** //ㄌ:IDK QQ
+	4.我直接讓雲科八景的位置在人物放在地圖上的時候就全部出現了 哈哈哈ㄏㄚ 沒有雷達的概念 哈哈哈 **//ㄌ 好主意
+	5.我想讓user點下景點的紅點的時候人物就移到紅點的位置 然後紅點消失 原本人物在的地方就消失人物 失敗** //
+求幫助-->
 
 <!DOCTYPE html>  
 <html>
@@ -30,9 +34,9 @@
 			margin-top:auto;
 		}
 		#mingame{
-			margin-left:300px;
+			margin-left:0px;
 			margin-top: 0px;
-			width: 25%;
+			width: 100%;
 			display:block;
 			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ 
 		}
@@ -43,31 +47,80 @@
 			display:block;
 			width: 100%;
 			height: 500px;
-			background:url('img/雲科地圖截圖.png') no-repeat -800px 0px;
+			background:url('img/雲科地圖截圖.png') no-repeat -500px 0px;
 		}
 
 		/*我們*/
-		#member1{				
+		#member{				
 			width: 15%;
 			height: 30%;
 			margin:5% 4% 0px 0px;
 		}
-		#member2{				
-			width: 15%;
-			height: 30%;
-			margin:5% 4% 0px 0px;
+		#scene1{
+			width: 1%; 
+			height: 2%;
+			left:28%;
+			top:23%;
+			z-index:-1;
+			position:absolute;
 		}
-		#member3{				
-			width: 15%;
-			height: 30%;
-			margin:5% 4% 0px 0px;
+		#scene2{
+			width: 1%; 
+			height: 2%;
+			left:27%;
+			top:28%;
+			z-index:-1;
+			position:absolute;
 		}
-		#member4{				
-			width: 15%;
-			height: 30%;
-			margin:5% 4% 0px 0px;
+		#scene3{
+			width: 1%; 
+			height: 2%;
+			left:20%;
+			top:24%;
+			z-index:-1;
+			position:absolute;
 		}
-		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/
+		#scene4{
+			width: 1%; 
+			height: 2%;
+			left:24%;
+			top:33%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene5{
+			width: 1%; 
+			height: 2%;
+			left:30%;
+			top:40%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene6{
+			width: 1%; 
+			height: 2%;
+			left:21%;
+			top:50%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene7{
+			width: 1%; 
+			height: 2%;
+			left:26%;
+			top:58%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene8{
+			width: 1%; 
+			height:2%;
+			left:28%;
+			top:74%;
+			z-index:-1;
+			position:absolute;
+		}	
+		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/ /*王:嘿嘿 我刪掉了 好像用不到的樣子 可能*/
 	</style>
 
 
@@ -76,8 +129,10 @@
 <body>	
 	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&autoLogAppEvents=1&version=v7.0&appId=566238000924758" nonce="4CU6IFOZ"></script>
+	<!-- 上面是fb要求的-->
 	<div class="fb-comments" data-href="https://tngo1234.github.io/" data-numposts="5" data-width=""></div>
-<!-- youtube load-->
+	<!-- fb留言板的位置-->
+	<!-- youtube load-->
 	<div>
 		<div data-video="V8RwHXUtCcw" data-autoplay="0" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
 			<img id="youtube-icon" src="https://i.imgur.com/IDzX9gL.png">
@@ -137,22 +192,51 @@
 		</script>
 
 		<!--換黑地圖按鈕-->
-		<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
-
+		
 	</div>
+
+	<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
+	
 	<div id="mingame" style="background-color:#ffffff">
+		<div id="steps">
+			<h1>
+				遊雲科八景
+			</h1>
+			<p id="ste">
+				第一步 請選擇與你一起遊雲科的夥伴 點選地圖下方的四位<br/>
+			</p>
+		</div>
 		<!--minigame 點選地圖人物 -->
 		<div id="map">
 			<img id="minga">
+			<div id="sc1"><img id="scene1" type="button" onclick="sc(1)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc2"><img id="scene2" type="button" onclick="sc(2)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc3"><img id="scene3" type="button" onclick="sc(3)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc4"><img id="scene4" type="button" onclick="sc(4)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc5"><img id="scene5" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc6"><img id="scene6" type="button" onclick="sc(6)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc7"><img id="scene7" type="button" onclick="sc(7)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc8"><img id="scene8" type="button" onclick="sc(8)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id ="mapisert"></div>
 		</div>
-		
+		<div class="modal" id="myModal2"> 
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<!-- Modal body -->
+					<div class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width=""></div>
+					<div class="modal-body" id="modal_body2"></div>
+					<!-- Modal footer -->
+					<div class="modal-footer" type=button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>
+					</div>
+				</div>
+			</div>
+		</div>	
 		<!--我們人物變button-->
-		<img id="member1" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
-		<img id="member2" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
-		<img id="member3" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
-		<img id="member4" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
-		<p>使用↑↓←→操作</p>
+		<img id="member" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
+		<img id="member" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
+		<img id="member" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
+		<img id="member" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
 		<!--data target #myModal1 確認是否用此member-->
 		<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P--><!--QQ QQ-->
 			<div class="modal-dialog">
@@ -194,44 +278,56 @@
 								}
 							}
 							var mx=0,my=0; //人物位置
-							var mmx=-800,mmy=0;
+							var mmx=-500,mmy=0;
 							function memberinsert(){//ㄌ:按確定後觸發
 								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
-								mx=23;
+								mx=40; //人物初始位置
 								my=14;
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 15%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 7%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								
+								//景點位置在地圖上出現
+								document.getElementById("scene1").style='z-index:2;';
+								document.getElementById("scene2").style='z-index:2;';
+								document.getElementById("scene3").style='z-index:2;';
+								document.getElementById("scene4").style='z-index:2;';
+								document.getElementById("scene5").style='z-index:2;';
+								document.getElementById("scene6").style='z-index:2;';
+								document.getElementById("scene7").style='z-index:2;';
+								document.getElementById("scene8").style='z-index:2;';
+								//說明第二步驟
+								document.getElementById("ste").innerHTML='第二步 請使用WASD移動 並請按下地圖上任意的紅點 <br/>';
 								
 							}
 							document.addEventListener("keydown",game);
 							function game(event){
 								switch(event.keyCode){
-									case 37:
-										if(mx>8)
+									case 65:
+										if(mx>5)
 											mx--;
 										else
 											mmx+=5;
 
 										break;
-									case 38:
-										if(my>5)
+									case 87:
+										if(my>20)
 											my--;
 										else
 											mmy+=5;
 										break;
-									case 39:
-										if(mx<40)
+									case 68:
+										if(mx<80)
 											mx++;
 										else
 											mmx-=5;
 										break;
-									case 40:
-										if(my<70)
+									case 83:
+										if(my<50)
 											my++;
 										else
 											mmy-=5;
 										break;
 								}
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 15%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 7%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								if(hasbeenclicked)
 									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
 								else
