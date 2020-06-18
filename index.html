@@ -32,6 +32,7 @@
 		#mingame{
 			margin-left:300px;
 			margin-top: 0px;
+			width: 25%;
 			display:block;
 			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ 
 		}
@@ -40,30 +41,30 @@
 		#minga{
 			margin-left:0px;
 			display:block;
-			width: 50%;
+			width: 100%;
 			height: 500px;
 			background:url('img/雲科地圖截圖.png') no-repeat -800px 0px;
 		}
 
 		/*我們*/
 		#member1{				
-			width: 3%;
-			height: 6%;
+			width: 15%;
+			height: 30%;
 			margin:5% 4% 0px 0px;
 		}
 		#member2{				
-			width: 3%;
-			height: 6%;
+			width: 15%;
+			height: 30%;
 			margin:5% 4% 0px 0px;
 		}
 		#member3{				
-			width: 3%;
-			height: 6%;
+			width: 15%;
+			height: 30%;
 			margin:5% 4% 0px 0px;
 		}
 		#member4{				
-			width: 3%;
-			height: 6%;
+			width: 15%;
+			height: 30%;
 			margin:5% 4% 0px 0px;
 		}
 		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/
@@ -137,7 +138,7 @@
 		<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
 
 	</div>
-	<div id="mingame">
+	<div id="mingame" style="background-color:#ffffff">
 		<!--minigame 點選地圖人物 -->
 		<div id="map">
 			<img id="minga">
@@ -149,6 +150,7 @@
 		<img id="member2" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
 		<img id="member3" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
 		<img id="member4" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
+		<p>使用↑↓←→操作</p>
 		<!--data target #myModal1 確認是否用此member-->
 		<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P--><!--QQ QQ-->
 			<div class="modal-dialog">
@@ -195,7 +197,7 @@
 								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
 								mx=23;
 								my=14;
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 6%; height: 9%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 15%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								
 							}
 							document.addEventListener("keydown",game);
@@ -227,7 +229,7 @@
 											mmy-=5;
 										break;
 								}
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 6%; height: 9%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 15%; height: 8%;left:'+mx+'%;top:'+my+'%;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								if(hasbeenclicked)
 									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
 								else
