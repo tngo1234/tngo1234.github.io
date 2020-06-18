@@ -231,8 +231,14 @@
 					<p id="ttitle" style="font-size:36px;font-family:'DFKai-sb';">雲湧八方</p>	
 					<p id="tcontent" style="font-size:20px;font-family:'DFKai-sb';">位於為校門口前方的大型水池。</p>	
 					<img id="tpicture" src="img/t1.jpg" style="width:400px">	
-					<div id="tfb"><div class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div></div>
-					<div class="modal-body" id="modal_body2"></div>
+					<div id="tfb1" class="fb-comments" data-href="https://tngo1234.github.io/1" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div id="tfb2" class="fb-comments" data-href="https://tngo1234.github.io/2" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div id="tfb3" class="fb-comments" data-href="https://tngo1234.github.io/3" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div id="tfb4" class="fb-comments" data-href="https://tngo1234.github.io/4" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div id="tfb5" class="fb-comments" data-href="https://tngo1234.github.io/5" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div id="tfb6" class="fb-comments" data-href="https://tngo1234.github.io/6" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div id="tfb7" class="fb-comments" data-href="https://tngo1234.github.io/7" style="visibility:hidden" data-numposts="5" data-width="500px"></div></div>
+					<div class="modal-body" id="modal_body2">
 					<!-- Modal footer -->
 					<div class="modal-footer" type=button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>
@@ -257,12 +263,20 @@
 							var tt=["雲湧八方","雲科精神","青大草原","龍潭藝文廣場","觀雲閣","雲那裡","雲夢湖與扶輪園"];
 							var tc=["位於為校門口前方的大型水池。","位於大禮堂迴廊草皮旁，以細長的紅色及白色柱子垂直交錯構成，而鐘塔的正上方由6個大鐘和6個小鐘，共12個鐘組成。","又稱管院草皮，緊鄰管理學院，上方有紅色及綠色的大型裝置藝術。","位於龍潭路旁邊，鄰近圖書館、藝文中心及大禮堂。","內部有電梯可上去，這座水塔只供應學生宿舍使用。平時水塔是不能進入的，但是每年水塔會配合校慶活動開放參觀。","又稱荷花池，為宿舍區學生上課必經的路，緊鄰卡璐佶咖啡館，每年5月-10月賞荷季節，池畔會開滿大量荷花。","雲科八景的代表，鄰近學生餐廳及活動中心，兩旁有種植樹木和花草，有時會有鵝鴨優游。"];
 							function sc(num){ //景點介紹
+								document.getElementById("tfb1").style="visibility:hidden";
+								document.getElementById("tfb2").style="visibility:hidden";
+								document.getElementById("tfb3").style="visibility:hidden";
+								document.getElementById("tfb4").style="visibility:hidden";
+								document.getElementById("tfb5").style="visibility:hidden";
+								document.getElementById("tfb6").style="visibility:hidden";
+								document.getElementById("tfb7").style="visibility:hidden";
 								mx=($('#scene'+num).css('Left')).replace("px",""); //這裡是直接取得元素屬性 裡面會有單位要去掉
 								my=($('#scene'+num).css('Top')).replace("px","");
 								document.getElementById("ttitle").innerHTML=tt[num-1];
 								document.getElementById("tcontent").innerHTML=tc[num-1];
 								document.getElementById("tpicture").src="img/t"+num+".jpg";
-								document.getElementById("tfb").innerHTML='<div class="fb-comments" data-href="https://tngo1234.github.io/'+num+'" data-numposts="5" data-width="500px"></div>'
+								fb="tfb"+num;
+								document.getElementById(fb).style="visibility:visible";
 								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 
 							}
