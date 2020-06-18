@@ -68,9 +68,9 @@
                 opacity: 1;
             }
 
-        img {
-            width: 100%;
-            height: 100%;
+        #show {
+            width: 700px;
+            height: 500px;
             transform: translateX(-50%);
         }
 
@@ -90,40 +90,43 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
         .marquee {
-            width: 300px;
-            height: 100px;
+            width: 220px;
+            height: 70px;
             overflow: hidden;
             position: absolute;
-            bottom: -100px;
-            left: 500px;
+            bottom: 200px;
+            left: 410px;
         }
-        #introduce{
-            height:400px;
-            width:800px;
-            position:absolute;
-            left:500px;
+
+        #introduce {
+            height: 500px;
+            width: 800px;
+            position: absolute;
+            left: 0px;
         }
     </style>
     <script>
-        var introduce = new Array("雲林科技大學校地面積約58公頃，雖然占地並不算大，但是大面積的草皮與雲夢湖穿插於校地中，讓進入雲科大後我們，自然感受到一股放鬆、靜謐與悠閒的氣氛。/雲科八景之一的雲夢湖是大學生製造回憶的背景，兩旁是宿舍與學生活動中心，與學生的互動關係更親近。"
-            ,"雲科大-〈鐘塔〉鐘代表了上課鐘聲，象徵學習精神，走進雲科大，遠遠的就能看見聳立在前端的一座鐘塔，它整體主要以細長的紅色柱子垂直交錯構成，四根米白色稍微粗的柱子負責穩固整個鐘塔的基底，鐘塔的正上方由6個大鐘和6個小鐘，共12個鐘組成。校慶時，鐘塔還會唱生日快樂歌"
-            , "3"
-            , "4"
-            , "5"
-            , "6"
-            , "7"
+        var introduce = new Array("雲科大：雲科大的校地廣達58公頃面積，雲科大位於雲林縣人口最多的斗六市，距離斗六車站約3公里，校園主要由北邊的大學路、東邊的中山路以及貫穿學校中心的龍潭路所組成，因校地廣大，因此學生上課多以腳踏車進行代步。"
+            , "觀雲閣：內部有電梯可上去，這座水塔只供應學生宿舍使用。平時水塔是不能進入的，但是每年水塔會配合校慶活動開放參觀。"
+            , "雲那裡：又稱荷花池，為宿舍區學生上課必經的路，緊鄰卡璐佶咖啡館，每年5月 - 10月賞荷季節，池畔會開滿大量荷花，雲科荷花池動線完善，荷花池中規劃小橋、步道、假山造景。荷花選擇在夏天浪漫綻放，出污泥而不染濯清漣而不妖，艷陽高照著，校園也能浪漫無比。"
+            , "雲湧八方：位於為校門口前方的大型水池，2005 獲邀設計國立雲林科技大學大門噴水池中央，入口意象公共藝術「雲湧八方」。"
+            , "雲科精神：雲科大-〈鐘塔〉鐘代表了上課鐘聲，象徵學習精神，走進雲科大，遠遠的就能看見聳立在前端的一座鐘塔，它整體主要以細長的紅色柱子垂直交錯構成，四根米白色稍微粗的柱子負責穩固整個鐘塔的基底，鐘塔的正上方由6個大鐘和6個小鐘，共12個鐘組成。校慶時，鐘塔還會唱生日快樂歌"
+            , "雲夢湖：雲科八景的代表，鄰近學生餐廳及活動中心，兩旁有種植樹木和花草，有時會有鵝鴨優游。雲科八景之一的雲夢湖是大學生製造回憶的背景，兩旁是宿舍與學生活動中心，與學生的互動關係更親近。"
+            , "青大草原：又稱管院草皮，緊鄰管理學院，上方有紅色及綠色的大型裝置藝術龍潭藝文廣場：位於龍潭路旁邊，鄰近圖書館、藝文中心及大禮堂。"
+            , "大禮堂：學生舉辦活動的地方，由雲科發起的制服日也是在這舉辦喔！"
 
         );
         var current = 0;
-        var img = new Array("A01.jpg", "A02.jpg", "A03.jpg", "A04.jpg", "A05.jpg", "A06.jpg", "A07.jpg");
+        var img = new Array("A01.jpg", "A02.jpg", "A03.jpg", "A04.jpg", "A05.jpg", "A06.jpg", "A07.jpg", "A08.jpg");
         var height = 0;
         $(document).ready(function () {
 
             for (var i = 1; i < img.length; i++) {
                 var str = "<li data-target=\"#demo\" data-slide-to=\"" + i + "\"></li>";
                 $(".carousel-indicators").append(str);
-                str = "<div class=\"carousel-item\"><img src =\"img/A0" + (i + 1) + ".jpg\" /></div>";
+                str = "<div class=\"carousel-item\"><img id=\"show\" src =\"img/A0" + (i + 1) + ".jpg\" /></div>";
                 $(".carousel-inner").append(str);
             }
 
@@ -138,14 +141,14 @@
 
             $(".carousel-control-prev").click(function () {
                 if (current == 0)
-                    current = 6;
+                    current = img.length - 1;
                 else
                     current--;
                 $(".marquee").html(introduce[current]);
                 height = 0;
             })
             $(".carousel-control-next").click(function () {
-                if (current == 6)
+                if (current == img.length - 1)
                     current = 0;
                 else
                     current++;
@@ -155,18 +158,16 @@
             })
 
             $(".marquee").html(introduce[0]);
-           
+
             window.setInterval(scroll, 50);
 
             function scroll() {
                 $(".marquee").scrollTop(height);
                 height++;
-                if (height == $(".marquee").height())
-                    height = 0;
             }
         });
 
-        
+
     </script>
 </head>
 <body>
@@ -188,7 +189,7 @@
         <div class="carousel-inner ">
             <div class="carousel-item active">
 
-                <img src="img/A01.jpg" />
+                <img id="show" src="img/A01.jpg" />
 
             </div>
         </div>
@@ -204,12 +205,16 @@
         </a>
     </div>
     <div>
-            <img src="img/小人物.png"  id="introduce"/>
-            <textarea class="container offset-5 col-7 " rows="7" placeholder="請留言給我們..."></textarea>
-            <div class="container offset-5 col-7" id="minigame">minigame</div>
-            <div class="marquee"></div>
+        <img src="img/小人物.png" id="introduce" />
+        <div class="card">
+            <div class="card-body container offset-5 col-7" style="color:transparent;">
+                <textarea class=" " rows="7" placeholder="請留言給我們..."></textarea>
+            </div>
+        </div>
+        <div class="container offset-5 col-7" id="minigame">minigame</div>
+        <div class="marquee"></div>
     </div>
-    
+
 
 </body>
 </html>
