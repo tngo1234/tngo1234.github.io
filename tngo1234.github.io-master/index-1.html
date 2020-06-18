@@ -1,0 +1,355 @@
+﻿<!--
+	2.bootstrap JS modal用來做地圖的景點介紹出現  //還要做留言板(汗)	//留言板交給宛君了!!@@
+	3.把member和scene背景透明 不知道為什麼用PS透明背景的gif檔都不會動了QQQQ **
+	4.我直接讓雲科八景的位置在人物放在地圖上的時候就全部出現了 哈哈哈ㄏㄚ 沒有雷達的概念 哈哈哈 **
+	5.我想讓user點下景點的紅點的時候人物就移到紅點的位置 然後紅點消失 原本人物在的地方就消失人物 失敗**
+求幫助-->
+
+<!DOCTYPE html>  
+<html>
+<head>
+	<title>title</title>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--bootstrap CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+	<style>
+		body{
+			background-color:aliceblue;
+		}
+		#nightlight{
+			margin-left:100px;
+			margin-top:auto;
+			display: block;
+			align-items: right;
+		}
+		#steps{
+			font-weight: 1000;
+			font-family: 微軟正黑體;
+			font-display: block;
+			text-align: center;
+		}
+		
+		#youtube-icon{
+			margin-left: 100px;
+			margin-top:auto;
+		}
+		#mingame{
+			margin-left:300px;
+			margin-top: 0px;
+			display:block;
+			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ /*王:好神奇*/
+		}
+		
+		/*mini game 地圖*/
+		#minga{
+			margin-left:0px;
+			display:block;
+			width: 50%;
+			height: 500px;
+			z-index:0;
+		}
+		#scene1{
+			width: 1%; 
+			height: 2%;
+			left:28%;
+			top:23%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene2{
+			width: 1%; 
+			height: 2%;
+			left:27%;
+			top:28%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene3{
+			width: 1%; 
+			height: 2%;
+			left:20%;
+			top:24%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene4{
+			width: 1%; 
+			height: 2%;
+			left:24%;
+			top:33%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene5{
+			width: 1%; 
+			height: 2%;
+			left:30%;
+			top:40%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene6{
+			width: 1%; 
+			height: 2%;
+			left:21%;
+			top:50%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene7{
+			width: 1%; 
+			height: 2%;
+			left:26%;
+			top:58%;
+			z-index:-1;
+			position:absolute;
+		}
+		#scene8{
+			width: 1%; 
+			height:2%;
+			left:28%;
+			top:74%;
+			z-index:-1;
+			position:absolute;
+		}						
+
+		/*我們*/
+		#member{				
+			width: 3%;
+			height: 6%;
+			margin:5% 4% 0px 0px;
+		}
+		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/ /*王:嘿嘿 我刪掉了 好像用不到的樣子 可能*/
+	</style>
+
+
+</head>
+
+<body>	
+	<div>		
+		<!---->
+		<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
+	</div>
+	<div id="steps">
+		<h1>
+			遊雲科八景
+		</h1>
+		<p id="ste">
+			第一步 請選擇與你一起遊雲科的夥伴 點選地圖下方的四位<br/>
+		</p>
+	</div>
+	<br>
+	<br>
+	<!-- youtube load-->
+	<div>
+		<div data-video="aHtWKbR_P-c" data-autoplay="0" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
+			<img id="youtube-icon" src="https://i.imgur.com/IDzX9gL.png" />
+			<iframe id="youtube-player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="0" height="0" src="https://i.imgur.com/JC08Fu3QfJg.html"></iframe>
+		</div>
+
+		<script type="text/javascript" id="www-widgetapi-script" src="./js/www-widgetapi.js.&#19979;&#36617;" async=""></script>
+		<script type="text/javascript" src="./js/iframe_api"></script>
+		<script>
+			var player;
+			function onYouTubeIframeAPIReady() {
+			
+				var ctrlq = document.getElementById("youtube-audio");
+				ctrlq.innerHTML = '<img id="youtube-icon" width="80px" src=""/><div id="youtube-player"></div>';
+				ctrlq.style.cssText = 'width:1px;box-sizing: border-box; position: absolute;bottom: 80px;cursor:hand;display:none';
+				ctrlq.onclick = toggleAudio;//2
+			
+				player = new YT.Player('youtube-player', {
+					height: '0',
+					width: '0',
+					videoId: ctrlq.dataset.video,
+					playerVars: {
+						autoplay: ctrlq.dataset.autoplay,
+						loop: ctrlq.dataset.loop
+					},
+					events: {
+						'onReady': onPlayerReady,	//3
+						'onStateChange': onPlayerStateChange	//4
+					} 
+				});
+			} 
+		
+			//1
+			function togglePlayButton(play) {    
+				document.getElementById("youtube-icon").src = play ? "https://i.imgur.com/IDzX9gL.png" : "https://i.imgur.com/quyUPXN.png";
+			}
+			//2
+			function toggleAudio() {
+				if ( player.getPlayerState() == 1  ) {
+					player.pauseVideo(); 
+					document.getElementById("youtube-icon").src =  "https://i.imgur.com/quyUPXN.png";	
+				} else {
+					player.playVideo();
+					document.getElementById("youtube-icon").src = "https://i.imgur.com/IDzX9gL.png";
+				} 
+			} 
+			//3
+			function onPlayerReady(event) {
+				document.getElementById("youtube-audio").style.display = "block";
+				togglePlayButton(player.getPlayerState() !== 5);	//1	//!==要同類型才會比較 !=會先轉換類型再比較
+			}
+			//4
+			function onPlayerStateChange(event) {
+				if (event.data === 0) {				//===檢查是否相同类型相同值
+					togglePlayButton(false); //1
+				}
+			}
+		</script>
+
+	</div>
+	<div id="mingame">
+		<!--minigame 點選地圖人物 -->
+		<div id="map">
+			<img id="minga" src="img/學校地圖.jpg" />
+			<!--雲科八景點選 modal介紹-->
+			<div id="sc1"><img id="scene1" type="button" onclick="sc(1)" data-toggle="modal" data-target="#myModal2" src="img/scene1.jpg" /></div>
+			<div id="sc2"><img id="scene2" type="button" onclick="sc(2)" data-toggle="modal" data-target="#myModal2" src="img/scene2.jpg" /></div>
+			<div id="sc3"><img id="scene3" type="button" onclick="sc(3)" data-toggle="modal" data-target="#myModal2" src="img/scene3.jpg" /></div>
+			<div id="sc4"><img id="scene4" type="button" onclick="sc(4)" data-toggle="modal" data-target="#myModal2" src="img/scene4.jpg" /></div>
+			<div id="sc5"><img id="scene5" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene5.jpg" /></div>
+			<div id="sc6"><img id="scene6" type="button" onclick="sc(6)" data-toggle="modal" data-target="#myModal2" src="img/scene6.jpg" /></div>
+			<div id="sc7"><img id="scene7" type="button" onclick="sc(7)" data-toggle="modal" data-target="#myModal2" src="img/scene7.jpg" /></div>
+			<div id="sc8"><img id="scene8" type="button" onclick="sc(8)" data-toggle="modal" data-target="#myModal2" src="img/scene8.jpg" /></div>
+			<div class="modal" id="myModal2"> 
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- Modal body -->
+						<div class="modal-body" id="modal_body2"></div>
+						<!-- Modal footer -->
+						<div class="modal-footer" type=button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>
+						</div>
+					</div>
+				</div>
+			</div>							
+			<!--我們人物變button-->
+			<img id="member" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
+			<img id="member" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
+			<img id="member" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
+			<img id="member" type="button" onclick="membersure(4)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />			
+			<div id ="mapisert"></div>
+			<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P--><!--QQ QQ-->
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<!-- Modal body -->
+						<div class="modal-body" id="modal_body">
+							<script>
+								var hasbeenclicked = false;
+								//黑夜白日模式
+								function nightlightf() {
+									hasbeenclicked=!hasbeenclicked
+									
+									if(hasbeenclicked){
+										document.getElementById("nightlight").innerHTML="白日模式";
+										document.getElementById("minga").src="img/黑夜.jpg";
+										document.querySelector('body').setAttribute('style', 'background-color:#00a');  //ㄌ:這邊對body的backgorund屬性做更改 (我也不知道這甚麼原理 抄來的)	//ㄨ:嘿嘿嘿 大老
+										document.querySelector('#steps').setAttribute('style', 'color:#fff');
+									}
+									else{
+										document.getElementById("nightlight").innerHTML="黑夜模式";
+										document.getElementById("minga").src="img/學校地圖.jpg";
+										document.querySelector('body').setAttribute('style', 'background-color:aliceblue');
+										document.querySelector('#steps').setAttribute('style', 'color:#000');
+									}
+								}
+								var takemember=0;//ㄌ:帶走的角色設為全域
+								function membersure(number) { //ㄌ:按角色後觸發
+									takemember=number;
+									var modalContent = document.getElementById("modal_body");
+									if(number==1){   
+										modalContent.innerHTML = "柏賢帶你走雲科 確定ㄇ"; 
+									}
+									else if(number==2){
+										modalContent.innerHTML="宛君帶你走雲科 確定ㄇ";
+									}
+									else if(number==3){
+										modalContent.innerHTML="冠佑帶你走雲科 確定ㄇ";
+									}
+									else if(number==4){
+										modalContent.innerHTML="疫情帶你走雲科 確定ㄇ";
+									}
+								}
+								//member放到地圖上
+								function memberinsert(){//ㄌ:按確定後觸發
+									document.getElementById("mapisert").innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:26%;top:12%;z-index:2;position:absolute;" />'; //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位 //酷
+									//景點位置在地圖上出現
+									document.getElementById("scene1").style='z-index:2;';
+									document.getElementById("scene2").style='z-index:2;';
+									document.getElementById("scene3").style='z-index:2;';
+									document.getElementById("scene4").style='z-index:2;';
+									document.getElementById("scene5").style='z-index:2;';
+									document.getElementById("scene6").style='z-index:2;';
+									document.getElementById("scene7").style='z-index:2;';
+									document.getElementById("scene8").style='z-index:2;';
+									//說明第二步驟
+									document.getElementById("ste").innerHTML='第二步 請按下地圖上任意的紅點 <br/>';
+								}
+								hasbeenclicked = false;
+								//雲科八景介紹詞和圖片
+								function sc(num){
+									//說明第三步驟
+									document.getElementById("ste").innerHTML='第二步 請按下地圖上任意的紅點 <br/>';
+
+									hasbeenclicked=!hasbeenclicked;
+									if(hasbeenclicked){
+										if(num==1){
+											document.getElementById("sc1").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+										else if(num==2){
+											document.getElementById("sc2").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+										else if(num==3){
+											document.getElementById("sc3").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}		
+										else if(num==4){
+											document.getElementById("sc4").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+										else if(num==5){
+											document.getElementById("sc5").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+										else if(num==6){
+											document.getElementById("sc6").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+										else if(num==7){
+											document.getElementById("sc7").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+										else if(num==8){
+											document.getElementById("sc8").innerHTML='<img src="img/'+takemember+'.png" style="width: 2%;height: 4%;margin:5% 4% 0px 0px;" />';		//王:失敗失敗 出不來QQ
+											document.getElementById("modal-body2").innerhtml='字 <img src="" style="width:;height:;" />';
+										}
+									}						
+								}
+							</script>
+						</div>
+						<!-- Modal footer -->
+						<div class="modal-footer" type=button>
+							<button type="button" class="btn btn-success" id="memShowMap" data-dismiss="modal" onclick="memberinsert()">YES</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--data target #myModal1 確認是否用此member-->
+		
+	</div>
+
+</body>
+</html>
