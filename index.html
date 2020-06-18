@@ -262,7 +262,7 @@
 								document.getElementById("ttitle").innerHTML=tt[num-1];
 								document.getElementById("tcontent").innerHTML=tc[num-1];
 								document.getElementById("tpicture").src="img/t"+num+".jpg";
-								document.getElementById("tfb").dataHref="https://tngo1234.github.io/"+num;
+								document.getElementById("tfb").setAttribute("data-href","https://tngo1234.github.io/"+num);
 								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 
 							}
