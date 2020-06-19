@@ -66,9 +66,9 @@
             opacity: 0.4;
         }
 
-            .carousel-control-prev-icon:hover {
-                opacity: 1;
-            }
+		.carousel-control-prev-icon:hover {
+			opacity: 1;
+		}
 
         .carousel-control-next-icon {
             width: 40px;
@@ -89,36 +89,19 @@
             transform: translateX(-50%);
         }
 
-        textarea {
-            border: solid;
-            border-radius: 5px;
-            display: flex;
-            margin-top: 5px;
-        }
-
-        #minigame {
-            border-radius: 5px;
-            border: solid;
-            height: 200px;
-            margin-top: 5px;
-            background-image: url('img/minigame.PNG');
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
 
         .marquee {
             width: 220px;
             height: 70px;
             overflow: hidden;
             position: absolute;
-            bottom: 200px;
+            top: 100px;
             left: 410px;
         }
 
         #introduce {
             height: 500px;
             width: 800px;
-            position: absolute;
             left: 0px;
         }
 		#nightlight{
@@ -133,7 +116,7 @@
 			margin-left:0px;
 			margin-top: 0px;
 			width: 100%;
-			height: 400px;
+			height: 520px;
 			display:block;
 			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ 
 		}
@@ -143,7 +126,7 @@
 			margin-left:0px;
 			display:block;
 			width: 100%;
-			height: 1500px;
+			height: 1700px;
 			background-color: wheat;
 			background:url('img/雲科地圖截圖.png') no-repeat;
 			background-size:100% 1500px;
@@ -245,16 +228,27 @@
 			str = "<div class=\"carousel-item\"><img id=\"show\" src =\"img/A0" + (i + 1) + ".jpg\" /></div>";
 			$(".carousel-inner").append(str);
 		}
-
+		var hasbeenclicked = false;
 		$("#sun").click(function () {
+			hasbeenclicked=false;
 			$("body").css("background-image", "url('img/sun.jpg')");
+			document.getElementById("nightlight").innerHTML="白日模式";
+			document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat";
+			document.getElementById("minga").style.backgroundSize="100% 1500px";
+			document.getElementById("mingame").style.backgroundColor="#ffffff";
 
 		})
 		$("#moon").click(function () {
+			hasbeenclicked=true
 			$("body").css("background-image", "url('img/moon.jpg')");
-
+			
+			document.getElementById("nightlight").innerHTML="黑夜模式";
+			document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat ";
+			document.getElementById("minga").style.backgroundSize="100% 1500px";
+			document.getElementById("mingame").style.backgroundColor="#a0a0a0";
 		})
-
+		
+					
 		$(".carousel-control-prev").click(function () {
 			if (current == 0)
 				current = img.length - 1;
@@ -322,10 +316,9 @@
             <span class="carousel-control-next-icon"></span>
         </a>
     </div>
-    <div>
+    <div style="position: relative;">
         <img src="img/小人物.png" id="introduce" />
-        <textarea class="container offset-5 col-7 " rows="7" placeholder="請留言給我們..."></textarea>
-        <div class="container offset-5 col-7" id="minigame">minigame</div>
+    
         <div class="marquee"></div>
 	</div>
 	
@@ -335,7 +328,7 @@
 
 	<!-- youtube load-->
 	<div>
-		<div data-video="V8RwHXUtCcw" data-autoplay="0" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
+		<div data-video="V8RwHXUtCcw" data-autoplay="1" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
 			<img id="youtube-icon" src="https://i.imgur.com/IDzX9gL.png" >
 			<iframe id="youtube-player" frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" width="0" height="0" src="https://i.imgur.com/JC08Fu3QfJg.html"></iframe>
 		</div>
@@ -396,7 +389,7 @@
 		
 	</div>
 
-	<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
+	<button id="nightlight" type="button" class="btn btn-primary">白日模式</button>
 	
 	<div id="mingame" style="background-color:#ffffff">
 		<div id="steps">
@@ -462,24 +455,7 @@
 								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 
 							}
-							var hasbeenclicked = false;
-							function nightlightf() {
-								hasbeenclicked=!hasbeenclicked
-								
-								if(hasbeenclicked){
-									document.getElementById("nightlight").innerHTML="白日模式";
-									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat ";
-									document.getElementById("minga").style.backgroundSize="100% 1500px";
-									document.querySelector('body').setAttribute('style', 'background-color:#000');  //ㄌ:這邊對body的backgorund屬性做更改 (我也不知道這甚麼原理 抄來的)
-								}
-								else{
-									document.getElementById("nightlight").innerHTML="黑夜模式";
-									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat";
-									document.getElementById("minga").style.backgroundSize="100% 1500px";
-									document.querySelector('body').setAttribute('style', 'background-color:#fff');
-								}
-									
-							}
+							
 							var takemember=0;//ㄌ:帶走的角色設為全域
 							function membersure(number) { //ㄌ:按角色後觸發
 								takemember=number
