@@ -8,10 +8,6 @@
 	4.我直接讓雲科八景的位置在人物放在地圖上的時候就全部出現了 哈哈哈ㄏㄚ 沒有雷達的概念 哈哈哈 **//ㄌ 好主意
 	5.我想讓user點下景點的紅點的時候人物就移到紅點的位置 然後紅點消失 原本人物在的地方就消失人物 失敗** //
 求幫助-->
-<!--
-	1.當背景地圖往下移動時 紅點往上 上下 右左 左右 當移動到超出地圖時就隱藏 目前只有調完前三個景點的位置 且位置無法隨地圖移動 可是我有用-mmx px 和-mmy px了 失敗@@
-	2.我想讓人科館的myModal2完又繼續myModal2 每一個Modal放幾張文資圖片 可是無法再次@@@@
-球球球-->
 
 <!DOCTYPE html>  
 <html>
@@ -108,7 +104,6 @@
             width: 800px;
             left: 0px;
         }
-
 		#nightlight{
 			margin-left:100px;
 			margin-top:auto;
@@ -122,7 +117,6 @@
 			margin-top: 0px;
 			width: 100%;
 			height: 520px;
-
 			display:block;
 			position: relative;/*李:這邊關係做依賴 MINIGAME裡的座標都以她為準*/ 
 		}
@@ -131,86 +125,86 @@
 		#minga{
 			margin-left:0px;
 			display:block;
-			width: 1215px;
-			height: 500px;
-			background:url('img/雲科地圖截圖.png') no-repeat -500px 0px;
-			z-index: auto;
+			width: 100%;
+			height: 1500px;
+			background-color: wheat;
+			background:url('img/雲科地圖截圖.png') no-repeat;
+			background-size:100% 1500px;
+			position:absolute;
+			z-index:0;
 		}
 
 		/*我們*/
 		#member{				
 			width: 15%;
 			height: 30%;
-			margin:5% 4% 0px 0px;
+			margin:5% 4% 0px 0px;	
 		}
-		/*目前只有調完前三個的位置 因為地圖還沒移動之前只有辦法知道前三個的位置*/
+		#members{				
+			top:1500px;
+			position:absolute;
+			background-color: white;
+			z-index:1;
+		}
 		#scene1{
-			width: 1%; 
-			height: 2%;
-			left:570px;
-			top:450px;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:56%;
+			top:100%;
+			z-index:-1;
+			position:absolute;
 		}
 		#scene2{
-			width: 1%; 
-			height: 2%;
-			left:530px;
-			top:580px;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:56%;
+			top:136%;
+			z-index:-1;
+			position:absolute;
 		}
 		#scene3{
-			width: 1%; 
-			height: 2%;
-			left:250px;
-			top:450px;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:40%;
+			top:100%;
+			z-index:-1;
+			position:absolute;
 		}
 		#scene4{
-			width: 1%; 
-			height: 2%;
-			left:24%;
-			top:33%;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:48%;
+			top:132%;
+			z-index:-1;
+			position:absolute;
 		}
 		#scene5{
-			width: 1%; 
-			height: 2%;
-			left:30%;
-			top:40%;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:60%;
+			top:330%;
+			z-index:-1;
+			position:absolute;
 		}
 		#scene6{
-			width: 1%; 
-			height: 2%;
-			left:21%;
-			top:50%;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:42%;
+			top:240%;
+			z-index:-1;
+			position:absolute;
 		}
 		#scene7{
-			width: 1%; 
-			height: 2%;
-			left:26%;
-			top:58%;
-			z-index:2;
-			position: absolute;
+			width: 30px; 
+			height: 30px;
+			left:52%;
+			top:292%;
+			z-index:-1;
+			position:absolute;
 		}
-		#scene8{
-			width: 1%; 
-			height:2%;
-			left:28%;
-			top:74%;
-			z-index:2;
-			position: absolute;
-		}	
+
 		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/ /*王:嘿嘿 我刪掉了 好像用不到的樣子 可能*/
 	</style>
-
 
 <script>
 	var introduce = new Array("雲科大：雲科大的校地廣達58公頃面積，雲科大位於雲林縣人口最多的斗六市，距離斗六車站約3公里，校園主要由北邊的大學路、東邊的中山路以及貫穿學校中心的龍潭路所組成，因校地廣大，因此學生上課多以腳踏車進行代步。"
@@ -331,8 +325,7 @@
 	<div id="fb-root"></div>
 	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&autoLogAppEvents=1&version=v7.0&appId=566238000924758" nonce="4CU6IFOZ"></script>
 	<!-- 上面是fb要求的-->
-	<div class="fb-comments" data-href="https://tngo1234.github.io/" data-numposts="5" data-width=""></div>
-	<!-- fb留言板的位置-->
+
 	<!-- youtube load-->
 	<div>
 		<div data-video="V8RwHXUtCcw" data-autoplay="1" data-loop="1" id="youtube-audio" style="width: 10px; margin: 2em auto; cursor: pointer; display: none;">
@@ -348,7 +341,7 @@
 			
 				var ctrlq = document.getElementById("youtube-audio");
 				ctrlq.innerHTML = '<img id="youtube-icon" width="80px" src=""/><div id="youtube-player"></div>';
-				ctrlq.style.cssText = 'width:1px;box-sizing: border-box; position: absolute;bottom: 80px;cursor:hand;display:none';
+				ctrlq.style.cssText = 'width:1px;box-sizing: border-box; position: absolute;top: 0px;right:300px;cursor:hand;display:none;position=absolute;';
 				ctrlq.onclick = toggleAudio;
 			
 				player = new YT.Player('youtube-player', {
@@ -392,13 +385,14 @@
 			}
 		</script>
 
+		<!--換黑地圖按鈕-->
 		
 	</div>
 
 	<button id="nightlight" type="button" onclick="nightlightf()" class="btn btn-primary">黑夜模式</button>
 	
 	<div id="mingame" style="background-color:#ffffff">
-		<div id="steps" style="font-family: 微軟正黑體; font-weight: 500; text-align: center;">
+		<div id="steps">
 			<h1>
 				遊雲科八景
 			</h1>
@@ -409,21 +403,25 @@
 		<!--minigame 點選地圖人物 -->
 		<div id="map">
 			<img id="minga">
-			<img id="scene1" type="button" onclick="sc(1)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene2" type="button" onclick="sc(2)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene3" type="button" onclick="sc(3)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene4" type="button" onclick="sc(4)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene5" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene6" type="button" onclick="sc(6)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene7" type="button" onclick="sc(7)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<img id="scene8" type="button" onclick="sc(8)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" />
-			<div id ="mapisert"></div>
+			<div id="sc1"><img id="scene1" type="button" onclick="sc(1)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc2"><img id="scene2" type="button" onclick="sc(2)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc3"><img id="scene3" type="button" onclick="sc(3)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc4"><img id="scene4" type="button" onclick="sc(4)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc5"><img id="scene5" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc6"><img id="scene6" type="button" onclick="sc(6)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc7"><img id="scene7" type="button" onclick="sc(7)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+	
 		</div>
+		<div id ="mapisert"></div>
 		<div class="modal" id="myModal2"> 
 			<div class="modal-dialog">
+				
 				<div class="modal-content">
 					<!-- Modal body -->
-					<div class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div>
+					<p id="ttitle" style="font-size:36px;font-family:'DFKai-sb';">雲湧八方</p>	
+					<p id="tcontent" style="font-size:20px;font-family:'DFKai-sb';">位於為校門口前方的大型水池。</p>	
+					<img id="tpicture" src="img/t1.jpg" style="width:400px">	
+					<div id="tfb" class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div>
 					<div class="modal-body" id="modal_body2"></div>
 					<!-- Modal footer -->
 					<div class="modal-footer" type=button>
@@ -433,10 +431,12 @@
 			</div>
 		</div>	
 		<!--我們人物變button-->
-		<img id="member" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
-		<img id="member" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
-		<img id="member" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
-		<img id="member" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
+		<div id="members">
+			<img id="member" type="button" onclick="membersure(0)" data-toggle="modal" data-target="#myModal1" src="img/1.gif" />
+			<img id="member" type="button" onclick="membersure(1)" data-toggle="modal" data-target="#myModal1" src="img/2.gif" />
+			<img id="member" type="button" onclick="membersure(2)" data-toggle="modal" data-target="#myModal1" src="img/3.gif" />
+			<img id="member" type="button" onclick="membersure(3)" data-toggle="modal" data-target="#myModal1" src="img/4.gif" />
+		</div>
 		<!--data target #myModal1 確認是否用此member-->
 		<div class="modal" id="myModal1">  <!--這邊你之前打成id="myModal"不能跑:P--><!--QQ QQ-->
 			<div class="modal-dialog">
@@ -458,7 +458,7 @@
 							
 							var takemember=0;//ㄌ:帶走的角色設為全域
 							function membersure(number) { //ㄌ:按角色後觸發
-								takemember=number;
+								takemember=number
 								var modalContent = document.getElementById("modal_body");
 								if(number==0){   
 									modalContent.innerHTML = "柏賢帶你走雲科 確定ㄇ"; 
@@ -470,145 +470,48 @@
 									modalContent.innerHTML="冠佑帶你走雲科 確定ㄇ";
 								}
 								else if(number==3){
-									modalContent.innerHTML="羿晴帶你走雲科 確定ㄇ";
+									modalContent.innerHTML="弈晴帶你走雲科 確定ㄇ";
 								}
 							}
 							var mx=0,my=0; //人物位置
-							var mmx=-500,mmy=0;
 							function memberinsert(){//ㄌ:按確定後觸發
-								a=takemember+1; //ㄌ:好像不能在下面那行計算 只好先做
-								mx=40; //人物初始位置
-								my=14;
-								document.getElementById("mapisert").innerHTML='<img id="player" src="img/'+a+'.gif" style="width: 7%; height: 8%;left:'+mx+'%;top:'+my+'%;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
+								a=takemember+1 //ㄌ:好像不能在下面那行計算 只好先做
+								mx=100; //人物初始位置
+								my=100;
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 								
 								//景點位置在地圖上出現
-								document.getElementById("scene1").style='z-index:2;';
-								document.getElementById("scene2").style='z-index:2;';
-								document.getElementById("scene3").style='z-index:2;';
-								document.getElementById("scene4").style='z-index:2;';
-								document.getElementById("scene5").style='z-index:2;';
-								document.getElementById("scene6").style='z-index:2;';
-								document.getElementById("scene7").style='z-index:2;';
-								document.getElementById("scene8").style='z-index:2;';
+								document.getElementById("scene1").style='z-index:4;';
+								document.getElementById("scene2").style='z-index:4;';
+								document.getElementById("scene3").style='z-index:4;';
+								document.getElementById("scene4").style='z-index:4;';
+								document.getElementById("scene5").style='z-index:4;';
+								document.getElementById("scene6").style='z-index:4;';
+								document.getElementById("scene7").style='z-index:4;';
 								//說明第二步驟
 								document.getElementById("ste").innerHTML='第二步 請使用WASD移動 並請按下地圖上任意的紅點 <br/>';
+								
 							}
 							document.addEventListener("keydown",game);
 							function game(event){
 								switch(event.keyCode){
 									case 65:
-										if(mx>5)
-											mx--;
-										else
-											mmx+=5;
+											mx-=10;
+
 										break;
 									case 87:
-										if(my>20)
-											my--;
-										else
-											mmy+=5;
+											my-=10;
 										break;
 									case 68:
-										if(mx<80)
-											mx++;
-										else
-											mmx-=5;
+											mx+=10;
 										break;
 									case 83:
-										if(my<50)
-											my++;
-										else
-											mmy-=5;
+											my+=10;
 										break;
 								}
-								document.getElementById("mapisert").innerHTML='<img id="player" src="img/'+a+'.gif" style="width: 7%; height: 8%;left:'+mx+'%;top:'+my+'%;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
-								if(hasbeenclicked)
-									document.getElementById("minga").style.background="url('img/黑夜.png') no-repeat "+mmx+"px "+mmy+"px";
-								else
-									document.getElementById("minga").style.background="url('img/雲科地圖截圖.png') no-repeat "+mmx+"px "+mmy+"px";
-								
-								//讓紅點跟著地圖移動 在還沒有移動地圖之前只有3個紅點可以知道位置
-								document.getElementById("scene1").style.left='(570-mmx)px';
-								document.getElementById("scene1").style.top='(450-mmy)px';
-								document.getElementById("scene2").style.left='(530-mmx)px';
-								document.getElementById("scene2").style.top='(580-mmy)px';
-								document.getElementById("scene3").style.left='(250-mmx)px';
-								document.getElementById("scene3").style.top='(450-mmy)px';
-								document.getElementById("scene4").style.left='';
-								document.getElementById("scene4").style.top='';
-								document.getElementById("scene5").style.left='';
-								document.getElementById("scene5").style.top='';
-								document.getElementById("scene6").style.left='';
-								document.getElementById("scene6").style.top='';
-								document.getElementById("scene7").style.left='';
-								document.getElementById("scene7").style.top='';
-								document.getElementById("scene8").style.left='';
-								document.getElementById("scene8").style.top='';
+								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
 
-								document.getElementById("look").innerHTML='mx='+mx+', my='+my+', mmx='+mmx+', mmy='+mmy ;
 							}
-							//雲科八景介紹詞和圖片
-							function sc(num){
-								//說明第三步驟
-								document.getElementById("ste").innerHTML='接下來 請隨意逛逛 謝謝~ <br/>';
-								
-								var gogo=document.getElementById("mapisert");
-								var sceneIntro=document.getElementById("modal_body2");
-								
-								if(num==1){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:27%;top:23%;z-index:2;position:absolute;" />';		
-									sceneIntro.innerHTML='雲湧八方<br/> <img src="img/雲湧八方.jpg" style="width:70%;height60%;" /><br/>2005 獲邀設計國立雲林科技大學大門噴水池中央，入口意象公共藝術「雲湧八方」';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-								}
-								else if(num==2){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:26%;top:26%;z-index:2;position:absolute;" />';
-									sceneIntro.innerHTML='鐘塔<br/> <img src="img/鐘塔.jpg" style="width:70%;height:60%;" /><br/>鐘代表了上課鐘聲，象徵學習精神，走進雲科大，遠遠的就能看見聳立在前端的一座鐘塔，它整體主要以細長的紅色柱子垂直交錯構成，四根米白色稍微粗的柱子負責穩固整個鐘塔的基底，鐘塔的正上方由6個大鐘和6個小鐘，共12個鐘組成。校慶時，鐘塔還會唱生日快樂歌';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-								}
-								else if(num==3){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:20%;top:22%;z-index:2;position:absolute;" />';		
-									sceneIntro.innerHTML='青青大草原<br/> <img src="img/青青大草原.jpg" style="width:70%;height:60%;"/><br/> 又稱管院草皮，緊鄰管理學院，上方有紅色及綠色的大型裝置藝術';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-
-								}		
-								else if(num==4){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:24%;top:31%;z-index:2;position:absolute;" />';		
-									sceneIntro.innerHTML='龍潭藝文廣場<br/> <img src="img/龍潭藝文廣場.jpg" style="width:70%;height:60%;" /><br/>位於龍潭路旁邊，鄰近圖書館、藝文中心及大禮堂。';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-
-								}
-								else if(num==5){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:29%;top:38%;z-index:2;position:absolute;" />';		
-									sceneIntro.innerHTML='人科館<br/> <img src="img/人科二館.jpg" style="width:70%;height:60%;" /><br/>全台唯一的文資系系辦在此';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-primary" onclick="RenM()" data-toggle="modal" data-target="myModal2">enter it</button><button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-									//有enter it(不知道為什麼出不來QQQQQQQ)和exit按鈕   enter it就又myModal2
-								}
-								else if(num==6){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:20%;top:48%;z-index:2;position:absolute;" />';		
-									sceneIntro.innerHTML='雲那裏荷花池<br/> <img src="img/雲那裏荷花池.jpg" style="width:70%;height:60%;" /><br/>雲科荷花池動線完善，荷花池中規劃小橋、步道、假山造景。荷花選擇在夏天浪漫綻放，出污泥而不染濯清漣而不妖，艷陽高照著，校園也能浪漫無比';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-								}
-								else if(num==7){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:25%;top:56%;z-index:2;position:absolute;" />';		
-									sceneIntro.innerHTML='雲夢湖與扶輪園<br/> <img src="img/雲夢湖與扶輪園.jpg" style="width:70%;height:60%;" /><br/>雲林科技大學校地面積約58公頃，雖然占地並不算大，但是大面積的草皮與雲夢湖穿插於校地中，讓進入雲科大後我們，自然感受到一股放鬆、靜謐與悠閒的氣氛。的背雲科八景之一的雲夢湖是大學生製造回憶景，兩旁是宿舍與學生活動中心，與學生的互動關係更親近。';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-								}
-								else if(num==8){
-									gogo.innerHTML='<img src="img/'+takemember+'.gif" style="width: 2%; height: 4%;left:27%;top:72%;z-index:2;position:absolute;" />';
-									sceneIntro.innerHTML='觀雲閣<br/> <img src="img/觀雲閣.jpg" style="width:70%;height:60%;" /><br/>內部有電梯可上去，這座水塔只供應學生宿舍使用。平時水塔是不能進入的，但是每年水塔會配合校慶活動開放參觀';		
-									document.getElementById("intoRen2").innerHTML='<button type="button" class="btn btn-primary" data-toggle="modal" data-target="myModal3">exit</button>';
-									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-								}
-								document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
-								//出現人科館裡面的照片
-							}
-							//再Modal 失敗
-							var pic=0;
-							function RenM(){
-								pic++;
-								document.getElementById("modal_body2").innerHTML='人科館<br/> <img src="img/1-'+pic+'.jpg" style="width:60%;height:50%;" /><br/>台灣文化資產';
-							}
-
 						</script>
 					</div>
 					<!-- Modal footer -->
@@ -620,6 +523,7 @@
 			</div>
 		</div>
 	</div>
-<p id="look"></p>
+	<div class="fb-comments" data-href="https://tngo1234.github.io/" data-numposts="5" data-width=""></div>
+	<!-- fb留言板的位置-->
 </body>
 </html>
