@@ -202,6 +202,14 @@
 			z-index:-1;
 			position:absolute;
 		}
+		#scene8{
+			width: 30px; 
+			height: 30px;
+			left:48%;
+			top:173%;
+			z-index:-1;
+			position:absolute;
+		}
 
 		/*李:好像沒必要設著麼多個 除非之後要改用座標定位 我先留著好了:P*/ /*王:嘿嘿 我刪掉了 好像用不到的樣子 可能*/
 	</style>
@@ -409,24 +417,20 @@
 			<div id="sc2"><img id="scene2" type="button" onclick="sc(2)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id="sc3"><img id="scene3" type="button" onclick="sc(3)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id="sc4"><img id="scene4" type="button" onclick="sc(4)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
-			<div id="sc5"><img id="scene5" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
+			<div id="sc5"><img id="scene5" type="button" onclick="sc(8)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id="sc6"><img id="scene6" type="button" onclick="sc(6)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 			<div id="sc7"><img id="scene7" type="button" onclick="sc(7)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
-	
+			<div id="sc8"><img id="scene8" type="button" onclick="sc(5)" data-toggle="modal" data-target="#myModal2" src="img/scene.jpg" /></div>
 		</div>
 		<div id ="mapisert"></div>
-		<div class="modal" id="myModal2"> 
+		<div class="modal" id="myModal2" style="font-family: 微軟正黑體; font-weight: 500; text-align: center;"> 
 			<div class="modal-dialog">
-				
 				<div class="modal-content">
 					<!-- Modal body -->
-					<p id="ttitle" style="font-size:36px;font-family:'DFKai-sb';">雲湧八方</p>	
-					<p id="tcontent" style="font-size:20px;font-family:'DFKai-sb';">位於為校門口前方的大型水池。</p>	
-					<img id="tpicture" src="img/t1.jpg" style="width:400px">	
-					<div id="tfb" class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div>
+					<div class="fb-comments" data-href="https://tngo1234.github.io/1" data-numposts="5" data-width="500px"></div>
 					<div class="modal-body" id="modal_body2"></div>
 					<!-- Modal footer -->
-					<div class="modal-footer" type=button>
+					<div class="modal-footer" id="intoRen" type="button">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>
 					</div>
 				</div>
@@ -447,16 +451,64 @@
 					<!-- Modal body -->
 					<div class="modal-body" id="modal_body">
 						<script>
-							var tt=["雲湧八方","雲科精神","青大草原","龍潭藝文廣場","觀雲閣","雲那裡","雲夢湖與扶輪園"];
-							var tc=["位於為校門口前方的大型水池。","位於大禮堂迴廊草皮旁，以細長的紅色及白色柱子垂直交錯構成，而鐘塔的正上方由6個大鐘和6個小鐘，共12個鐘組成。","又稱管院草皮，緊鄰管理學院，上方有紅色及綠色的大型裝置藝術。","位於龍潭路旁邊，鄰近圖書館、藝文中心及大禮堂。","內部有電梯可上去，這座水塔只供應學生宿舍使用。平時水塔是不能進入的，但是每年水塔會配合校慶活動開放參觀。","又稱荷花池，為宿舍區學生上課必經的路，緊鄰卡璐佶咖啡館，每年5月-10月賞荷季節，池畔會開滿大量荷花。","雲科八景的代表，鄰近學生餐廳及活動中心，兩旁有種植樹木和花草，有時會有鵝鴨優游。"];
-							function sc(num){ //景點介紹
+							function sc(num){
+								//說明第三步驟
+								document.getElementById("ste").innerHTML='接下來 請隨意逛逛 謝謝~ <br/>';
+								
+								var gogo=document.getElementById("mapisert");
+								var sceneIntro=document.getElementById("modal_body2");
+								
+								if(num==1){
+									sceneIntro.innerHTML='雲湧八方<br/> <img src="img/雲湧八方.jpg" style="width:70%;height60%;" /><br/>2005 獲邀設計國立雲林科技大學大門噴水池中央，入口意象公共藝術「雲湧八方」';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}
+								else if(num==2){
+									sceneIntro.innerHTML='鐘塔<br/> <img src="img/鐘塔.jpg" style="width:70%;height:60%;" /><br/>鐘代表了上課鐘聲，象徵學習精神，走進雲科大，遠遠的就能看見聳立在前端的一座鐘塔，它整體主要以細長的紅色柱子垂直交錯構成，四根米白色稍微粗的柱子負責穩固整個鐘塔的基底，鐘塔的正上方由6個大鐘和6個小鐘，共12個鐘組成。校慶時，鐘塔還會唱生日快樂歌';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}
+								else if(num==3){
+									sceneIntro.innerHTML='青青大草原<br/> <img src="img/青青大草原.jpg" style="width:70%;height:60%;"/><br/> 又稱管院草皮，緊鄰管理學院，上方有紅色及綠色的大型裝置藝術';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}		
+								else if(num==4){
+									sceneIntro.innerHTML='龍潭藝文廣場<br/> <img src="img/龍潭藝文廣場.jpg" style="width:70%;height:60%;" /><br/>位於龍潭路旁邊，鄰近圖書館、藝文中心及大禮堂。';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+
+								}
+								else if(num==5){
+									sceneIntro.innerHTML='人科館<br/> <img src="img/人科二館.jpg" style="width:70%;height:60%;" /><br/>全台唯一的文資系系辦在此';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-primary" onclick="RenM()" data-toggle="modal" data-target="myModal2">enter it</button><button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+									//有enter it(不知道為什麼出不來QQQQQQQ)和exit按鈕   enter it就又myModal2
+								}
+								else if(num==6){
+									sceneIntro.innerHTML='雲那裏荷花池<br/> <img src="img/雲那裏荷花池.jpg" style="width:70%;height:60%;" /><br/>雲科荷花池動線完善，荷花池中規劃小橋、步道、假山造景。荷花選擇在夏天浪漫綻放，出污泥而不染濯清漣而不妖，艷陽高照著，校園也能浪漫無比';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}
+								else if(num==7){
+									sceneIntro.innerHTML='雲夢湖與扶輪園<br/> <img src="img/雲夢湖與扶輪園.jpg" style="width:70%;height:60%;" /><br/>雲林科技大學校地面積約58公頃，雖然占地並不算大，但是大面積的草皮與雲夢湖穿插於校地中，讓進入雲科大後我們，自然感受到一股放鬆、靜謐與悠閒的氣氛。的背雲科八景之一的雲夢湖是大學生製造回憶景，兩旁是宿舍與學生活動中心，與學生的互動關係更親近。';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}
+								else if(num==8){
+									sceneIntro.innerHTML='觀雲閣<br/> <img src="img/觀雲閣.jpg" style="width:70%;height:60%;" /><br/>內部有電梯可上去，這座水塔只供應學生宿舍使用。平時水塔是不能進入的，但是每年水塔會配合校慶活動開放參觀';		
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}
 								mx=($('#scene'+num).css('Left')).replace("px",""); //這裡是直接取得元素屬性 裡面會有單位要去掉
 								my=($('#scene'+num).css('Top')).replace("px","");
-								document.getElementById("ttitle").innerHTML=tt[num-1];
-								document.getElementById("tcontent").innerHTML=tc[num-1];
-								document.getElementById("tpicture").src="img/t"+num+".jpg";
-								document.getElementById("mapisert").innerHTML='<img id=player src="img/'+a+'.gif" style="width: 100px; height: 100px;left:'+mx+'px;top:'+my+'px;border:4px black dashed;z-index:2;position:absolute;" />' //這邊要放Z-INDEX才能決定圖片前後 position:absolute絕對定位
-
+							}
+							//出現人科館裡面的照片
+							//再Modal 成功
+							var pic=0;
+							function RenM(){
+								//pic=0~29 第1~30張時
+								if(pic<30){
+									pic++;
+									document.getElementById("modal_body2").innerHTML='人科館<br/> <img src="img/1-'+pic+'.jpg" style="width:60%;height:50%;" /><br/>台灣文化資產';
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-primary" onclick="RenM()" data-toggle="modal" data-target="myModal2">Next one</button><button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+								}
+								else{	//第31張時
+									document.getElementById("intoRen").innerHTML='<button type="button" class="btn btn-danger" data-dismiss="modal">exit</button>';
+									pic=0;
+								}
 							}
 							
 							var takemember=0;//ㄌ:帶走的角色設為全域
@@ -491,6 +543,7 @@
 								document.getElementById("scene5").style='z-index:4;';
 								document.getElementById("scene6").style='z-index:4;';
 								document.getElementById("scene7").style='z-index:4;';
+								document.getElementById("scene8").style='z-index:4;';
 								//說明第二步驟
 								document.getElementById("ste").innerHTML='第二步 請使用WASD移動 並請按下地圖上任意的紅點 <br/>';
 								
